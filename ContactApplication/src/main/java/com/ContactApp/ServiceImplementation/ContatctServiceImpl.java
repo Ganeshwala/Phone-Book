@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ContactApp.DAO.ContactDAO;
 import com.ContactApp.Domain.Contact;
+import com.ContactApp.RowMapper.ContactRowMapper;
 import com.ContactApp.Service.ContactServices;
 import com.ContactApp.Util.StringUtil;
 
@@ -53,8 +54,9 @@ public class ContatctServiceImpl implements ContactServices {
 
 	@Override
 	public List<Contact> findUserContact(Integer userId, String txt) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select contactId,userId,contactName,contactPhone,contactEmail, contactAddress,contactRemark from contact where userId='"+userId+"' and (contactName like '%"+txt+"%' or contactPhone like '%"+txt+"%' or contactEmail like '%"+txt+"%' or contactAddress like '%"+txt+"%' or contactRemark like '%"+txt+"%')";;
+		List<Contact> contactList = jService.query(sql,new ContactRowMapper());
+		return contactList;
 	}
 
 }

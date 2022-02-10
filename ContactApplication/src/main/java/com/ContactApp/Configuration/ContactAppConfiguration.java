@@ -23,5 +23,6 @@ public class ContactAppConfiguration implements WebMvcConfigurer {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resourceURl/**").addResourceLocations("/resources/");
 	}
 }
