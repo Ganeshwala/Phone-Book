@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,17 +14,21 @@
 		<tr>
 			<td height="80px">
 			 <!-- Header -->
-			 	<center>Contact Application</center>
+			 	<jsp:include page="layouts/Header.jsp"/>
 			 </td>
 		</tr>
 		<tr>
-			<td height="25px"><!-- menu --> </td>
+			<td height="25px"><!-- menu -->
+				<jsp:include page="layouts/menu.jsp"/>
+			</td>
 		</tr>
 		<tr>
 			<td height="350px"> <!-- body --></td>
 		</tr>
 		<tr>
-			<td height="25px"><!-- footer --> </td>
+			<td height="25px"><!-- footer -->
+				<jsp:include page="layouts/Footer.jsp"/>
+			 </td>
 		</tr>
 	</table>
 </body>
