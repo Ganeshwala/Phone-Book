@@ -11,10 +11,10 @@ public class User {
 	private String loginName;
 	private String password;
 	private int role;
-	private int loginStatus;
+	private Integer loginStatus;
 
 	public User(int userId, String userName, String userPhone, String userEmail, String userAddress, String loginName,
-			String password, int role, int loginStatus) {
+			String password, int role, Integer loginStatus) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -95,11 +95,11 @@ public class User {
 		this.role = role;
 	}
 
-	public int getLoginStatus() {
+	public Integer getLoginStatus() {
 		return loginStatus;
 	}
 
-	public void setLoginStatus(int loginStatus) {
+	public void setLoginStatus(Integer loginStatus) {
 		this.loginStatus = loginStatus;
 	}
 
