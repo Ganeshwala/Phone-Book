@@ -33,12 +33,13 @@ public class UserServiceImpl implements UserServices {
 
 	@Override
 	public User login(String loginName, String password) throws UserBlockException {
-		String sql ="select userId,userName,userPhone,userAddress,userEmail,role,loginStatus,loginName from user where loginName = :ln and password =:pw";
-		Map m = new HashMap();
+		System.out.println("loginName=====>"+loginName+"password<======"+password);
+		String sql ="select userId,userName,userPhone,userAddress,userEmail,role,loginStatus,loginName from user  where loginName='"+loginName+"' and password='"+password+"'";
+		/*Map m = new HashMap();
 		m.put("ln",loginName);
-		m.put("pw",password);
+		m.put("pw",password);*/
 		try {
-			User userResult = jUserService.queryForObject(sql, new UserRowMapper(), m);
+			User userResult = jUserService.queryForObject(sql, new UserRowMapper());
 			if(userResult.getLoginStatus().equals(UserServices.login_Status_Block)) {
 				throw new UserBlockException("Your Account has been blocked !!!");
 			}else {
