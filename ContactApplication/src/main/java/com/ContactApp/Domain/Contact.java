@@ -2,32 +2,33 @@ package com.ContactApp.Domain;
 
 public class Contact {
 
-	private int contactId;// PK -key
-	private int userId; // FK -key
+	private Integer contactId;// PK -key
+	private Integer userId; // FK -key
 	private String contactName;
 	private String contactPhone;
 	private String contactEmail;
 	private String contactAddress;
 	private String contactRemark;
 
-	public int getContactId() {
-		return contactId;
-	}
 
 	public Contact() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setContactId(int contactId) {
+	public Integer getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(Integer contactId) {
 		this.contactId = contactId;
 	}
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

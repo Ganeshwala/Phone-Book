@@ -22,34 +22,16 @@ public class UserSAOImpl implements UserDAO {
 	
 	@Override
 	public void save(User user) {
-		String sql ="insert into user(userName,userPhone,userEmail,userAddress,loginName,password,role,loginStatus) values(:userName, :userPhone, :userEmail, :userAddress, :loginName, :password, :role,:loginStatus)";
-		Map m = new HashMap();
-		m.put("userName", user.getUserName());
-		m.put("userPhone", user.getUserPhone());
-		m.put("userEmail", user.getUserEmail());
-		m.put("userAddress", user.getUserAddress());
-		m.put("loginName", user.getLoginName());
-		m.put("password", user.getPassword());
-		m.put("role", user.getRole());
-		m.put("loginStatus", user.getLoginStatus());
-		SqlParameterSource ps = new MapSqlParameterSource(m);
-		jTemp.update(sql, ps);
+		String sql ="insert into user(userName,userPhone,userEmail,userAddress,loginName,password,role,loginStatus) values('"+user.getUserName()+"', '"+user.getUserPhone()+"','"+user.getUserEmail()+"', '"+user.getUserAddress()+"', '"+user.getLoginName()+"', '"+user.getPassword()+"', '"+user.getRole()+"','"+user.getLoginStatus()+"')";
+		jTemp.update(sql);
 		System.out.println("User Inserted sucessfully!!!!!");
 	}
 
 	@Override
 	public void update(User user) {
 		// TODO Auto-generated method stub
-		String sql = "update user set userName =:name ,userPhone=:phone,userEmail=:email,userAddress=:address,role=:role,loginStatus=:loginStatus where userId=:id";
-		Map m = new HashMap();
-		m.put("name",user.getUserName());
-		m.put("phone",user.getUserPhone());
-		m.put("email",user.getUserEmail());
-		m.put("affress",user.getUserAddress());
-		m.put("role",user.getRole());
-		m.put("loginStatus",user.getLoginStatus());
-		m.put("id", user.getUserId());
-		jTemp.update(sql,m);
+		String sql = "update user set userName ='"+user.getUserName()+"' ,userPhone='"+user.getUserPhone()+"',userEmail='"+user.getUserEmail()+"',userAddress='"+user.getUserAddress()+"',role='"+user.getRole()+"',loginStatus='"+user.getLoginStatus()+"' where userId='"+user.getUserId()+"'";
+		jTemp.update(sql);
 		System.out.println("Update Records");
 	}
 

@@ -20,30 +20,15 @@ public class ContactDAOImpl implements ContactDAO {
 	@Override
 	public void save(Contact contact) {
 	
-		String sql = "insert into contact(userId,contactName,contactPhone,contactEmail, contactAddress,contactRemark) values(:userId,:contactName,:contactPhone,:contactEmail, :contactAddress,:contactRemark)";
-		Map m = new HashMap();
-		m.put("userId", contact.getUserId());
-		m.put("contactName",contact.getContactName());
-		m.put("contactPhone", contact.getContactPhone());
-		m.put("contactEmail", contact.getContactEmail());
-		m.put("contactAddress",contact.getContactAddress());
-		m.put("contactRemrk",contact.getContactRemark());
-		jTemp.update(sql,m);
+		String sql = "insert into contact(userId,contactName,contactPhone,contactEmail, contactAddress,contactRemark) values('"+contact.getUserId()+"','"+contact.getContactName()+"','"+contact.getContactPhone()+"','"+contact.getContactEmail()+"', '"+contact.getContactAddress()+"','"+contact.getContactRemark()+"')";
+		jTemp.update(sql);
 		System.out.println("contact Added!!!!");
-
 	}
 
 	@Override
 	public void update(Contact contact) {
-		String sql = "update contatc set userId=:userId,contactName=:name,contactPhone=:phone,contactEmail=:email, contactAddress=:address, contactRemark=:remark where contactId=?";
-		Map m = new HashMap();
-		m.put("userId", contact.getUserId());
-		m.put("name",contact.getContactName());
-		m.put("phone", contact.getContactPhone());
-		m.put("email", contact.getContactEmail());
-		m.put("address",contact.getContactAddress());
-		m.put("remrk",contact.getContactRemark());
-		jTemp.update(sql,m,contact.getContactId());
+		String sql = "update contatc set userId='"+contact.getUserId()+"',contactName='"+contact.getContactName()+"',contactPhone='"+contact.getContactPhone()+"',contactEmail='"+contact.getContactEmail()+"', contactAddress='"+contact.getContactAddress()+"', contactRemark='"+contact.getContactRemark()+"' where contactId='"+contact.getContactId()+"'";
+		jTemp.update(sql);
 	}
 
 	@Override
