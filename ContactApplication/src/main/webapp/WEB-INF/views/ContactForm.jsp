@@ -32,7 +32,7 @@
 					<p class="error">${err }</p>
 				</c:if>
 				<c:if test="${success!=null }">
-					<p class="success">${succ }</p>
+					<p class="success">${success }</p>
 				</c:if>
 				<s:url var="url_save" value="/saveContact"/>
 				<f:form action="${url_save }" modelAttribute="contact">

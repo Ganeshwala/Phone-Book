@@ -1,12 +1,16 @@
 package com.ContactApp.Controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ContactApp.Domain.Contact;
 import com.ContactApp.Service.ContactServices;
@@ -37,5 +41,17 @@ public class ContactController {
 			m.addAttribute("err", "Failed to Save Contact");
 			return "ContactForm";
 		}
+	}
+	
+	@RequestMapping(value="/user/contactList")
+	public String contactList(HttpSession sess,Model m) {
+		m.addAttribute("contactList",cService.findUserContact((Integer)sess.getAttribute("userId")));
+		return "ContactList";
+	}
+	
+	@RequestMapping(value="/user/delete")
+	public String contactDelete(@RequestParam("contactId") Integer cid) {
+		cService.delete(cid);
+		return "redirect:/user/contactList?msg=del";
 	}
 }

@@ -14,6 +14,7 @@ public class ContactRowMapper implements RowMapper<Contact> {
 		Contact c = new Contact();
 		c.setContactId(rs.getInt("contactId"));
 		c.setUserId(rs.getInt("userId"));
+		c.setContactName(rs.getString("contactName"));
 		c.setContactEmail(rs.getString("contactEmail"));
 		c.setContactPhone(rs.getString("contactPhone"));
 		c.setContactAddress(rs.getString("contactAddress"));

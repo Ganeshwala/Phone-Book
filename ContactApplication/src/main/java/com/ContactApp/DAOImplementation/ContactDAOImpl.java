@@ -39,8 +39,8 @@ public class ContactDAOImpl implements ContactDAO {
 
 	@Override
 	public void delete(Integer contactId) {
-		String sql = "delete from contact where contactId=?";
-		jTemp.update(sql,contactId);
+		String sql = "delete from contact where contactId='"+contactId+"'";
+		jTemp.update(sql);
 	}
 
 	@Override
@@ -59,8 +59,8 @@ public class ContactDAOImpl implements ContactDAO {
 
 	@Override
 	public List<Contact> findByProperty(String propertyName, Object propValue) {
-		String sql = "select contactId,userId,contactName,contactPhone,contactEmail, contactAddress,contactRemark from contact where"+propertyName+"=?";
-		List<Contact> contactRecords = jTemp.query(sql,new ContactRowMapper(),propValue);
+		String sql = "select contactId,userId,contactName,contactPhone,contactEmail, contactAddress,contactRemark from contact where "+propertyName+"='"+propValue+"'";
+		List<Contact> contactRecords = jTemp.query(sql,new ContactRowMapper());
 		return contactRecords;
 	}
 
