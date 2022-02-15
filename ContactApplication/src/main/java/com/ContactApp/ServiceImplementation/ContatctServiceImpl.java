@@ -42,7 +42,8 @@ public class ContatctServiceImpl implements ContactServices {
 	@Override
 	public void delete(Integer[] conIds) {
 		String ids = StringUtil.toCommaSeparatedString(conIds);
-		String sql = "delete from contact where contactId in ('"+ids+"')";
+		String sql = "delete from contact where contactId in ("+ids+")";
+		//System.out.println(sql+"delete Query");
 		jService.update(sql);
 	}
 

@@ -27,10 +27,25 @@ public class ContactController {
 		return "ContactForm";
 	}
 	
+	@RequestMapping(value="/user/edit")
+	public String editUser(@RequestParam("contactId") Integer cid,HttpSession sess,Model m) {
+		sess.setAttribute("userContactId", cid);
+		Contact userContact = cService.findById(cid);
+		m.addAttribute("contact", userContact);
+		return "ContactForm";
+	}
+	
+	@RequestMapping(value="/user/searchContact")
+	public String searchContact(@RequestParam("search") String search,HttpSession session,Model m) {
+		Integer userId = (Integer)session.getAttribute("userId");
+		m.addAttribute("contactList",cService.findUserContact(userId, search));
+		return "ContactList";
+	}
+	
 	@RequestMapping(value="/saveContact")
 	public String saveContact(@ModelAttribute("contact")Contact c,HttpSession session,Model m) {
 		Integer contactId = (Integer)session.getAttribute("userContactId");
-		System.out.println("contactId"+contactId);
+		//System.out.println("contactId"+contactId);
 		Integer userId = (Integer) session.getAttribute("userId");
 		if(contactId != null) {
 			try {
@@ -75,18 +90,11 @@ public class ContactController {
 		return "redirect:/user/contactList?msg=del";
 	}
 	
-	@RequestMapping(value="/user/edit")
-	public String editUser(@RequestParam("contactId") Integer cid,HttpSession sess,Model m) {
-		sess.setAttribute("userContactId", cid);
-		Contact userContact = cService.findById(cid);
-		m.addAttribute("contact", userContact);
-		return "ContactForm";
+	@RequestMapping(value="/user/bulkContactDelete")
+	public String deleteBulkContact(@RequestParam("cid")Integer[] contactIds) {
+		cService.delete(contactIds);
+		return "redirect:/user/contactList?msg=del";
 	}
 	
-	@RequestMapping(value="/user/searchContact")
-	public String searchContact(@RequestParam("search") String search,HttpSession session,Model m) {
-		Integer userId = (Integer)session.getAttribute("userId");
-		m.addAttribute("contactList",cService.findUserContact(userId, search));
-		return "ContactList";
-	}
+	
 }
