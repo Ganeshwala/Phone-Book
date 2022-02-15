@@ -27,7 +27,7 @@ public class ContactDAOImpl implements ContactDAO {
 
 	@Override
 	public void update(Contact contact) {
-		String sql = "update contatc set userId='"+contact.getUserId()+"',contactName='"+contact.getContactName()+"',contactPhone='"+contact.getContactPhone()+"',contactEmail='"+contact.getContactEmail()+"', contactAddress='"+contact.getContactAddress()+"', contactRemark='"+contact.getContactRemark()+"' where contactId='"+contact.getContactId()+"'";
+		String sql = "update contact set userId='"+contact.getUserId()+"',contactName='"+contact.getContactName()+"',contactPhone='"+contact.getContactPhone()+"',contactEmail='"+contact.getContactEmail()+"', contactAddress='"+contact.getContactAddress()+"', contactRemark='"+contact.getContactRemark()+"' where contactId='"+contact.getContactId()+"'";
 		jTemp.update(sql);
 	}
 

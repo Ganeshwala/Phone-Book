@@ -31,7 +31,11 @@
 				<c:if test="${param.msg eq 'del' }">
 					<p class="success">Record Deleted Successfully</p>
 				</c:if>
-				
+				<form action="<s:url value="/user/searchContact"/>">
+					<input type="text" name="search" value="${param.search }" placeholder="Enter search string">
+					<button>Search</button>
+				</form>
+				</br>
 				<table border="1">
 					<thead>
 						<th>SR</th>

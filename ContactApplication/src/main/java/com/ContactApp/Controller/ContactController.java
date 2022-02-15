@@ -30,10 +30,12 @@ public class ContactController {
 	@RequestMapping(value="/saveContact")
 	public String saveContact(@ModelAttribute("contact")Contact c,HttpSession session,Model m) {
 		Integer contactId = (Integer)session.getAttribute("userContactId");
+		System.out.println("contactId"+contactId);
+		Integer userId = (Integer) session.getAttribute("userId");
 		if(contactId != null) {
 			try {
-				
-				c.setUserId(contactId); // FK -> logged User Id
+				c.setUserId(userId);
+				c.setContactId(contactId); // FK -> logged User Id
 				cService.update(c);
 				m.addAttribute("success", "Edit Successfully !!!!");
 				return "ContactForm";
@@ -45,7 +47,7 @@ public class ContactController {
 			}
 		}else {
 			try {
-				Integer userId = (Integer) session.getAttribute("userId");
+				
 				c.setUserId(userId); // FK -> logged User Id
 				cService.save(c);
 				m.addAttribute("success", "Save Successfully !!!!");
@@ -79,5 +81,12 @@ public class ContactController {
 		Contact userContact = cService.findById(cid);
 		m.addAttribute("contact", userContact);
 		return "ContactForm";
+	}
+	
+	@RequestMapping(value="/user/searchContact")
+	public String searchContact(@RequestParam("search") String search,HttpSession session,Model m) {
+		Integer userId = (Integer)session.getAttribute("userId");
+		m.addAttribute("contactList",cService.findUserContact(userId, search));
+		return "ContactList";
 	}
 }
