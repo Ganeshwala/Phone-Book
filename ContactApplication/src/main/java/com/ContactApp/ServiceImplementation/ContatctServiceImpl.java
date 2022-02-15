@@ -59,4 +59,9 @@ public class ContatctServiceImpl implements ContactServices {
 		return contactList;
 	}
 
+	@Override
+	public Contact findById(Integer cid) {
+		return contactService.findById(cid);
+	}
+
 }

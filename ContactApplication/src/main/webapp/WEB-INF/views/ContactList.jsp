@@ -28,7 +28,7 @@
 			<td height="350px">
 				<h3>Contact List</h3>
 				
-				<c:if test="${param.act eq 'del' }">
+				<c:if test="${param.msg eq 'del' }">
 					<p class="success">Record Deleted Successfully</p>
 				</c:if>
 				
@@ -58,10 +58,13 @@
 									<td>${con.contactEmail }</td>
 									<td>${con.contactAddress }</td>
 									<td>${con.contactRemark}</td>
+									 	<s:url var="url_edit" value="/user/edit">
+									 		<s:param name="contactId" value="${con.contactId}"/>
+									 	</s:url>
 									 	<s:url var="url_del" value="/user/delete">
 									 		<s:param name="contactId" value="${con.contactId}"/>
 									 	</s:url>
-									<td>Edit| <a href="${url_del }">Delete</a></td>
+									<td><a href="${url_edit }">Edit</a> | <a href="${url_del }">Delete</a></td>
 									<td hidden>${con.contactId}</td>
 								</tr>
 							</c:forEach>

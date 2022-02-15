@@ -29,18 +29,36 @@ public class ContactController {
 	
 	@RequestMapping(value="/saveContact")
 	public String saveContact(@ModelAttribute("contact")Contact c,HttpSession session,Model m) {
-		try {
-			Integer userId = (Integer) session.getAttribute("userId");
-			c.setUserId(userId); // FK -> logged User Id
-			cService.save(c);
-			m.addAttribute("success", "Save Successfully !!!!");
-			return "ContactForm";
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-			m.addAttribute("err", "Failed to Save Contact");
-			return "ContactForm";
+		Integer contactId = (Integer)session.getAttribute("userContactId");
+		if(contactId != null) {
+			try {
+				
+				c.setUserId(contactId); // FK -> logged User Id
+				cService.update(c);
+				m.addAttribute("success", "Edit Successfully !!!!");
+				return "ContactForm";
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e.getMessage());
+				m.addAttribute("err", "Failed to Edit Contact");
+				return "ContactForm";
+			}
+		}else {
+			try {
+				Integer userId = (Integer) session.getAttribute("userId");
+				c.setUserId(userId); // FK -> logged User Id
+				cService.save(c);
+				m.addAttribute("success", "Save Successfully !!!!");
+				return "ContactForm";
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e.getMessage());
+				m.addAttribute("err", "Failed to Save Contact");
+				return "ContactForm";
+			}
 		}
+		
+		
 	}
 	
 	@RequestMapping(value="/user/contactList")
@@ -53,5 +71,13 @@ public class ContactController {
 	public String contactDelete(@RequestParam("contactId") Integer cid) {
 		cService.delete(cid);
 		return "redirect:/user/contactList?msg=del";
+	}
+	
+	@RequestMapping(value="/user/edit")
+	public String editUser(@RequestParam("contactId") Integer cid,HttpSession sess,Model m) {
+		sess.setAttribute("userContactId", cid);
+		Contact userContact = cService.findById(cid);
+		m.addAttribute("contact", userContact);
+		return "ContactForm";
 	}
 }

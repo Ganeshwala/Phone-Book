@@ -45,8 +45,8 @@ public class ContactDAOImpl implements ContactDAO {
 
 	@Override
 	public Contact findById(Integer contactId) {
-		String sql = "select contactId,userId,contactName,contactPhone,contactEmail, contactAddress,contactRemark from contact where contactId=?";
-		Contact con = jTemp.queryForObject(sql, new ContactRowMapper(),contactId);
+		String sql = "select contactId,userId,contactName,contactPhone,contactEmail, contactAddress,contactRemark from contact where contactId='"+contactId+"'";
+		Contact con = jTemp.queryForObject(sql, new ContactRowMapper());
 		return con;
 	}
 
